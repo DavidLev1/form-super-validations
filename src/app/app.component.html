@@ -1,20 +1,585 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div class="container">
+  <form class="card main-card" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="main-header" >Reactive Form Validations</div>
+
+    <div class="form-control">
+      <label for="username">Username</label>
+      <input 
+        id="username" 
+        type="text" 
+        placeholder="Enter username here" 
+        formControlName="username"
+      >
+      <div
+        *ngIf="form.get('username').invalid && form.get('username').touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('username').errors.required">
+          Username is a required field
+        </small>
+        <small *ngIf="form.get('username').errors.minlength">
+          Username length must be at least 
+          {{form.get('username').errors.minlength.requiredLength}}
+          <br>
+          Now its length is 
+          {{form.get('username').errors.minlength.actualLength}}
+        </small>
+        <small *ngIf="form.get('username').errors.maxlength">
+          Username max length can be 
+          {{form.get('username').errors.maxlength.requiredLength}}
+          <br>
+          Now its length is 
+          {{form.get('username').errors.maxlength.actualLength}}
+        </small>
+        <small *ngIf="form.get('username').errors.isUsernameForbidden">
+          Username {{form.get('username').value}} is not allowed
+        </small>
+      </div>
+    </div>
+
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input 
+        id="password" 
+        type="password" 
+        placeholder="Enter password here" 
+        formControlName="password"
+      >
+      <div
+        *ngIf="form.get('password').invalid && form.get('password').touched"
+        class="validation"
+      >
+        <small *ngIf="form.get('password').errors.required">
+          Password is a required field
+        </small>
+        <small *ngIf="form.get('password').errors.minlength">
+          Password length must be at least 
+          {{form.get('password').errors.minlength.requiredLength}}
+          <br>
+          Now its length is 
+          {{form.get('password').errors.minlength.actualLength}}
+        </small>
+        <small *ngIf="form.get('password').errors.maxlength">
+          Password max length can be 
+          {{form.get('password').errors.maxlength.requiredLength}}
+          <br>
+          Now its length is 
+          {{form.get('password').errors.maxlength.actualLength}}
+        </small>
+      </div>
+    </div>
+
+
+    <div class="card" formGroupName="personalInfo">
+      <h2 class="secondary-header">Personal Info</h2>
+
+      <div class="form-control">
+        <label for="first-name">First Name</label>
+        <input 
+          id="first-name" 
+          type = "text"
+          placeholder="Enter first name here"
+          formControlName="firstName"
+        >
+        <div 
+          *ngIf="form.get('personalInfo.firstName').invalid && form.get('personalInfo.firstName').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('personalInfo.firstName').errors.required">
+            First Name is a required field
+          </small>
+          <small *ngIf="form.get('personalInfo.firstName').errors.firstNameHasDigit">
+            First Name can't contain digits or spaces<br>
+          </small>
+          <small *ngIf="form.get('personalInfo.firstName').errors.minlength">
+            First Name must contain at least
+            {{form.get('personalInfo.firstName').errors.minlength.requiredLength}}
+            characters
+            <br>
+            Now it contains 1 character
+          </small>
+          <small *ngIf="form.get('personalInfo.firstName').errors.maxlength">
+            First Name can contain at most
+            {{form.get('personalInfo.firstName').errors.maxlength.requiredLength}}
+            characters
+            <br>
+            Now it contains
+            {{form.get('personalInfo.firstName').errors.maxlength.actualLength}}
+            character
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="last-name">Last Name</label>
+        <input 
+          id="last-name" 
+          type = "text"
+          placeholder="Enter last name here"
+          formControlName="lastName"
+        >
+        <div 
+          *ngIf="form.get('personalInfo.lastName').invalid && form.get('personalInfo.lastName').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('personalInfo.lastName').errors.required">
+            Last Name is a required field
+          </small>
+          <small *ngIf="form.get('personalInfo.lastName').errors.lastNameHasDigit">
+            Last Name can't contain digits or spaces<br>
+          </small>
+          <small *ngIf="form.get('personalInfo.lastName').errors.minlength">
+            Last Name must contain at least
+            {{form.get('personalInfo.lastName').errors.minlength.requiredLength}}
+            characters
+            <br>
+            Now it contains 1 character 
+          </small>
+          <small *ngIf="form.get('personalInfo.lastName').errors.maxlength">
+            Last Name can contain at most
+            {{form.get('personalInfo.lastName').errors.maxlength.requiredLength}}
+            characters
+            <br>
+            Now it contains
+            {{form.get('personalInfo.lastName').errors.maxlength.actualLength}}
+            character
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="gender">Gender (choose from the list below)</label>
+        <select
+          id="gender" 
+          formControlName="gender"
+        >
+          <!-- <option value="male">Male</option>
+          <option value="female">Female</option> -->
+          <option 
+            *ngFor="let gender of genders; let genderIndex = index"
+            value={{gender}} >
+            {{gender}}
+          </option>
+        </select>
+        <!-- <div 
+          class="radios-container" 
+          *ngFor="let gender of genders; let genderIndex = index"
+        >
+          <span>{{personalInfo}}</span>
+          <label
+             for={{gender}}
+             > 
+             {{gender}} 
+          </label>
+          <input 
+            id={{gender}}
+            type="radio" 
+            formControlName="gender" 
+            [value]="gender"
+          >  
+        </div> -->
+        <div
+          *ngIf="form.get('personalInfo.gender').invalid && form.get('personalInfo.gender').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('personalInfo.gender').errors.required">
+            Gender is a required field
+          </small>  
+        </div>
+
+      </div>
+
+      <div class="form-control">
+        <label for="identify-card">ID</label>
+        <input 
+          id="identify-card" 
+          type="text"
+          placeholder="Enter ID here"
+          formControlName="identifyCard"
+        >
+        <div
+          *ngIf="form.get('personalInfo.identifyCard').invalid && form.get('personalInfo.identifyCard').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('personalInfo.identifyCard').errors.required">
+            ID is a required field
+          </small>
+          <small *ngIf="form.get('personalInfo.identifyCard').errors.isIdNotANum">
+            ID can contain only digits<br>
+          </small>
+          <small *ngIf="form.get('personalInfo.identifyCard').errors.minlength">
+            ID length must be    
+            {{form.get('personalInfo.identifyCard').errors.minlength.requiredLength}}
+            <br>
+            Now its length is
+            {{form.get('personalInfo.identifyCard').errors.minlength.actualLength}}
+          </small>
+          <small *ngIf="form.get('personalInfo.identifyCard').errors.maxlength">
+            ID length must be  
+            {{form.get('personalInfo.identifyCard').errors.maxlength.requiredLength}}
+            <br>
+            Now its length is
+            {{form.get('personalInfo.identifyCard').errors.maxlength.actualLength}}
+          </small>
+          
+        </div>
+      </div>
+
+      <div class="form-control">
+          <label for="email">Email</label>
+          <input 
+            id="email" 
+            type="text" 
+            placeholder="Enter email here" 
+            formControlName="email"
+          >
+          <div
+            *ngIf="form.get('personalInfo.email').invalid && form.get('personalInfo.email').touched"
+            class="validation"
+          >
+            <small *ngIf="form.get('personalInfo.email').errors.required">
+              Email is a required field
+            </small>
+            <small *ngIf="form.get('personalInfo.email').errors.email">
+              Please enter a legal email
+            </small>
+            <small *ngIf="form.get('personalInfo.email').errors.restrictedEmail">
+              Email {{form.get('personalInfo.email').value}} is not allowed
+            </small>
+            <small *ngIf="form.get('personalInfo.email').errors.registeredEmail">
+              Email 
+              <b>
+                <u style="color: blue">
+                  {{form.get('personalInfo.email').value}}
+                </u>
+              </b>
+              is already registered
+            </small>
+          </div>
+        </div>
+
+        <div class="form-control">
+          <label for="about-you">About You</label>
+          <textarea 
+            rows="4" 
+            cols="15"
+            id="about-you" 
+            type="text" 
+            placeholder="Write here about yourself" 
+            formControlName="aboutYou"
+          >
+          </textarea>
+          <div
+            *ngIf="form.get('personalInfo.aboutYou').invalid && form.get('personalInfo.aboutYou').touched"
+            class="validation"
+          >
+            <small *ngIf="form.get('personalInfo.aboutYou').errors.required">
+              About You is a required field
+            </small>
+            <small *ngIf="form.get('personalInfo.aboutYou').errors.minlength">
+              About You field must contain at least 
+              {{form.get('personalInfo.aboutYou').errors.minlength.requiredLength}}
+              characters
+              <br>
+              Now it contains is 
+              {{form.get('personalInfo.aboutYou').errors.minlength.actualLength}}
+              characters
+            </small>
+            <small *ngIf="form.get('personalInfo.aboutYou').errors.maxlength">
+              About You field can contain at most 
+              {{form.get('personalInfo.aboutYou').errors.maxlength.requiredLength}}
+              characters
+              <br>
+              Now it contains 
+              {{form.get('personalInfo.aboutYou').errors.maxlength.actualLength}}
+              characters
+            </small>
+          </div>
+        </div>
+    </div>
+
+
+    <div class="card" formGroupName="address">
+      <h2 class="secondary-header">Address</h2>
+
+      <div class="form-control">
+        <label for="country">Country (choose from the list below)</label>
+        <select id="country" formControlName="country">
+          <option value="israel">Israel</option>
+          <option value="russia">Russia</option>
+          <option value="usa">USA</option>
+        </select>
+        <div
+          *ngIf="form.get('address.country').invalid && form.get('address.country').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('address.country').errors.required">
+            Country is a required field
+          </small>  
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="city">City</label>
+        <input 
+          id="city" 
+          type="text" 
+          formControlName="city" 
+          placeholder="Enter city here"
+        >
+        <div
+          *ngIf="form.get('address.city').invalid && form.get('address.city').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('address.city').errors.required">
+            City is a required field
+          </small>  
+        </div>
+      </div>
+      <button 
+        style="margin-bottom: 1rem" 
+        class="btn" 
+        type="button" 
+        (click)="setCapital()">
+        Set Capital
+      </button>
+
+
+      <div class="form-control">
+        <label for="house-num">House Number</label>
+        <input 
+          id="house-num" 
+          type="number" 
+          min="1"
+          max="999"
+          formControlName="houseNum" 
+          placeholder="Enter house number here"
+        >
+        <div
+          *ngIf="form.get('address.houseNum').invalid && form.get('address.houseNum').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('address.houseNum').errors.required">
+            House Number is a required field
+          </small>
+          <small *ngIf="form.get('address.houseNum').errors.min">
+            House Number can't be smaller than  
+            {{form.get('address.houseNum').errors.min.min}}
+            <br>
+            Now it 
+            {{form.get('address.houseNum').errors.min.actual}}
+          </small>
+          <small *ngIf="form.get('address.houseNum').errors.max">
+            House Number can't be greater than  
+            {{form.get('address.houseNum').errors.max.max}}
+            <br>
+            Now it
+            {{form.get('address.houseNum').errors.max.actual}}
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control">
+        <label for="flat-num">Flat Number</label>
+        <input 
+          id="flat-num" 
+          type="number" 
+          min="1"
+          max="250"
+          formControlName="flatNum" 
+          placeholder="Enter flat number here"
+        >
+        <div
+          *ngIf="form.get('address.flatNum').invalid && form.get('address.flatNum').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('address.flatNum').errors.required">
+            Flat Number is a required field
+          </small>
+          <small *ngIf="form.get('address.flatNum').errors.min">
+            Flat Number can't be smaller than  
+            {{form.get('address.flatNum').errors.min.min}}
+            <br>
+            Now it 
+            {{form.get('address.flatNum').errors.min.actual}}
+          </small>
+          <small *ngIf="form.get('address.flatNum').errors.max">
+            Flat Number can't be greater than  
+            {{form.get('address.flatNum').errors.max.max}}
+            <br>
+            Now it
+            {{form.get('address.flatNum').errors.max.actual}}
+          </small>
+        </div>
+      </div>
+
+
+
+      <div class="form-control">
+        <label for="zip-code">ZIP Code</label>
+        <input 
+          id="zip-code" 
+          type="text" 
+          formControlName="zipCode" 
+          placeholder="Enter zip code here"
+        >
+        <div
+          *ngIf="form.get('address.zipCode').invalid && form.get('address.zipCode').touched"
+          class="validation"
+        >
+          <small *ngIf="form.get('address.zipCode').errors.required">
+            ZIP Code is a required field
+          </small>
+          <small *ngIf="form.get('address.zipCode').errors.isZIPCodeNotANum">
+            ZIP Code can contain only digits <br>
+          </small>
+          <small *ngIf="form.get('address.zipCode').errors.minlength">
+            zip code must contain  
+            {{form.get('address.zipCode').errors.minlength.requiredLength}}
+            characters
+            <br>
+            now it contains
+            {{form.get('address.zipCode').errors.minlength.actualLength}}
+            characters
+          </small>
+
+          <small *ngIf="form.get('address.zipCode').errors.maxlength">
+            zip code must contain  
+            {{form.get('address.zipCode').errors.maxlength.requiredLength}}
+            characters
+            <br>
+            now it contains
+            {{form.get('address.zipCode').errors.maxlength.actualLength}}
+            characters
+          </small>
+        </div>
+      </div>  
+    </div>
+
+
+    <div class="card" formGroupName="skills">
+      <h2 class="secondary-header">Your Skills</h2>
+
+      <div
+        class="form-control"
+        *ngFor="let skillControl of form.get('skills').controls; let idx = index"
+      >
+        <!-- <p>Skill {{idx+1}} value: {{skillControl.value}}</p> -->
+        <label for={{idx}}> Skill {{idx + 1}} </label>
+        <input id={{idx}} type="text" [formControlName]="idx">
+
+        <div 
+          class="validation"
+          *ngIf="skillControl.invalid && skillControl.touched"
+        >
+          <small *ngIf="skillControl.errors.required">
+            Skill {{idx+1}} is a required field
+          </small>
+          <small *ngIf="skillControl.errors.minlength">
+            Skill {{idx+1}} must have at least
+            {{skillControl.errors.minlength.requiredLength}}
+            characters
+            <br>
+            Now it has 
+            {{skillControl.errors.minlength.actualLength}}
+            character
+          </small>
+          <small *ngIf="skillControl.errors.maxlength">
+            Skill {{idx+1}} can contain maximum
+            {{skillControl.errors.maxlength.requiredLength}}
+            characters
+            <br>
+            Now it contains 
+            {{skillControl.errors.maxlength.actualLength}}
+            characters
+          </small>
+        </div>
+
+        <button 
+          style="margin-top: 1rem; margin-bottom: 1rem;" 
+          class="btn btn-remove-skill" 
+          type="button" 
+          (click)="removeSkill(idx)">
+          Remove Skill {{idx+1}}
+        </button>
+      </div>
+
+      <button class="btn btn-add-skill" type="button" (click)="addSkill()">Add Skill</button>
+      <button
+        style="margin-top: 1.5rem;"
+        *ngIf="form.get('skills').length > 1"
+        class="btn btn-remove-all-skills" 
+        type="button" 
+        (click)="removeAllSkills()">
+        Remove All Skills
+      </button>
+    </div>
+
+
+    <div class="card" formArrayName="hobbies">
+        <h2 class="secondary-header">Your Hobbies</h2>
+
+        <div 
+          class="form-control"
+          *ngFor="let hobbyControl of form.get('hobbies').controls; let hobbyIndex = index"
+        >
+          <label for={{idx}}> Hobby {{hobbyIndex + 1}} </label>
+          <input id={{idx}} type="text" [formControlName]="hobbyIndex">
+
+          <div 
+            class="validation"
+            *ngIf="hobbyControl.invalid && hobbyControl.touched"
+          >
+            <small *ngIf="hobbyControl.errors.required">
+              Hobby {{hobbyIndex+1}} is a required field
+            </small>
+            <small *ngIf="hobbyControl.errors.minlength">
+              Hobby {{hobbyIndex+1}} must have at least
+              {{hobbyControl.errors.minlength.requiredLength}}
+              characters
+              <br>
+              Now it has 
+              {{hobbyControl.errors.minlength.actualLength}}
+              character
+            </small>
+            <small *ngIf="hobbyControl.errors.maxlength">
+              Hobby {{hobbyIndex+1}} can contain maximum
+              {{hobbyControl.errors.maxlength.requiredLength}}
+              characters
+              <br>
+              Now it contains 
+              {{hobbyControl.errors.maxlength.actualLength}}
+              characters
+            </small>
+          </div>
+          
+          <button 
+            style="margin-top: 1rem; margin-bottom: 1rem;" 
+            class="btn btn-remove-hobby" 
+            type="button" 
+            (click)="removeHobby(hobbyIndex)">
+            Remove Hobby {{hobbyIndex + 1}}
+          </button>
+        </div>
+
+        <button class="btn btn-add-hobby" type="button" (click)="addHobby()">Add Hobby</button>
+        <button
+          style="margin-top: 1.5rem;"
+          *ngIf="form.get('hobbies').length > 1"
+          class="btn btn-remove-all-hobbies" 
+          type="button" 
+          (click)="removeAllHobbies()">
+          Remove All Hobbies
+        </button>
+    </div>
+
+    <br><br>
+    <div style="text-align: center;">
+      <button class="btn btn-submit" type="submit" [disabled]="form.invalid || form.pending">Submit</button>
+    </div>
+    
+  </form>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+
 

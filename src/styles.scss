@@ -1,1 +1,189 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: david, 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #ecf9ec;
+  color: #333;
+}
+
+.main-header {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bolder;
+  color: #005580;
+}
+
+.secondary-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #666;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+.btn {
+  display: inline-block;
+  background: #0099cc;
+  color: #fff;
+  padding: 0.4rem 1.3rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: opacity 0.2s ease-in;
+  outline: none;
+  
+  &:disabled {
+    background: #ccc;
+    color: #000;
+    cursor: not-allowed;
+  }
+}
+.btn:hover {
+  opacity: 0.8;
+}
+.btn-add-skill {
+  background: #009999;
+}
+.btn-remove-skill {
+  background: #9966ff;
+}
+.btn-remove-all-skills {
+  background: #6600cc;
+}
+.btn-add-hobby {
+  background: #808000;
+}
+.btn-remove-hobby {
+  background: #ff8080;
+}
+.btn-remove-all-hobbies {
+  background: #cc3399;
+}
+.btn-submit {
+  font-size: 2rem;
+  font-weight: bolder;
+}
+
+.form-control {
+  display: block;
+  margin-top: 0.3rem;
+  margin-bottom: .5rem;
+
+  label {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: .5rem;
+    margin-top: 1.5rem;
+  }
+
+  input[type=radio] {
+    transform: scale(1.5);	 
+    
+  }
+  input[type=radio]:checked {
+    transform: scale(2);
+  }
+
+  .radios-container {
+    text-align: left;
+  }
+
+  .validation {
+    color: red;
+  }
+}
+
+.card {
+  padding: 2%;
+  border: #cc6699 2px dotted;
+  margin: 0.7rem 0;
+}
+.main-card {
+  padding: 3%;
+  border:  #99b3e6 5px double;
+  margin: 0.7rem 0;
+}
+
+input,
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  // margin-bottom: 1rem;
+}
+
+small {
+  font-size: 1rem;
+}
+
+hr {
+  margin: .5rem 0;
+}
+
+
+
+@media (max-width: 400px) {
+  .main-header {
+    font-size: 1.2rem;
+  }
+  .secondary-header {
+    font-size: 1rem;
+  }
+
+  .form-control {
+    label {
+      font-size: 0.9rem;
+    }
+  }
+
+  .btn {
+    font-size: 0.6rem;
+  }
+  .btn-submit {
+    font-size: 1.5rem;
+  }
+  
+
+  input,
+  select,
+  textarea {
+    font-size: 0.7rem;
+  }
+
+  small {
+    font-size: 0.6rem;
+  }
+}
